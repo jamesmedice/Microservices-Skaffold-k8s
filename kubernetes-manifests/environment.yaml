@@ -12,6 +12,7 @@ spec:
       containers:
       - name: server
         image: envservice
+        imagePullPolicy: Never
         ports:
         - containerPort: 8666
         env:

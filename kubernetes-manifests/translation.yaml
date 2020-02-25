@@ -12,6 +12,7 @@ spec:
       containers:
       - name: server
         image: translationservice
+        imagePullPolicy: Never
         ports:
         - containerPort: 9555
         env:
