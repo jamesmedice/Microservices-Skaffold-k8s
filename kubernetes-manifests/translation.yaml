@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: translationservice
+spec:
+  template:
+    metadata:
+      labels:
+        app: translationservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: translationservice
+        ports:
+        - containerPort: 9555
+        env:
+        - name: PORT
+          value: "9555"
+        resources:
+          requests:
+            cpu: 200m
+            memory: 180Mi
+          limits:
+            cpu: 300m
+            memory: 300Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: translationservice
+spec:
+  type: ClusterIP
+  selector:
+    app: translationservice
+  ports:
+  - name: grpc
+    port: 9555
+    targetPort: 9555
